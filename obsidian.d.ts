@@ -3,18 +3,6 @@ import { EditorView, ViewPlugin } from '@codemirror/view';
 import * as CodeMirror from 'codemirror';
 import * as Moment from 'moment';
 
-declare global {
-    /**
-     * The actively focused Window object. This is usually the same as `window` but
-     * it will be different when using popout windows.
-     */
-    const activeWindow: Window;
-    /**
-     * The actively focused Document object. This is usually the same as `document` but
-     * it will be different when using popout windows.
-     */
-    const activeDocument: Document;
-}
 /**
  * @public
  */
