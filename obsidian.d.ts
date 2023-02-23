@@ -3,6 +3,15 @@ import { EditorView, ViewPlugin } from '@codemirror/view';
 import * as CodeMirror from 'codemirror';
 import * as Moment from 'moment';
 
+declare global {
+    interface HTMLElement extends Element {
+        /**
+         * @param listener - the callback to call when this node has been migrated to another window.
+         * @returns destroy - a function to remove the event handler to avoid memory leaks.
+         */
+        onWindowMigrated(this: HTMLElement, listener: (win: Window) => any): () => void;
+    }
+}
 /**
  * @public
  */
