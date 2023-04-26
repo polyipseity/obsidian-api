@@ -11,6 +11,13 @@ declare global {
          */
         onWindowMigrated(this: HTMLElement, listener: (win: Window) => any): () => void;
     }
+    interface Window {
+        /**
+         * The actively focused Window object. This is usually the same as `window` but
+         * it will be different when using popout windows.
+         */
+        activeWindow: Window;
+    }
 }
 /**
  * @public
