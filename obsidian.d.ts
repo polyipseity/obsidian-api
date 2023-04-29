@@ -267,6 +267,10 @@ export class ColorComponent extends ValueComponent<string> {
     /**
      * @public
      */
+    setDisabled(disabled: boolean): this;
+    /**
+     * @public
+     */
     getValue(): HexString;
     /**
      * @public
@@ -424,11 +428,7 @@ export class Component {
      * @public
      */
     registerDomEvent<K extends keyof HTMLElementEventMap>(el: HTMLElement, type: K, callback: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-    /**
-     * Registers an key event to be detached when unloading
-     * @public
-     */
-    registerScopeEvent(keyHandler: KeymapEventHandler): void;
+
     /**
      * Registers an interval (from setInterval) to be cancelled when unloading
      * Use {@link window.setInterval} instead of {@link setInterval} to avoid TypeScript confusing between NodeJS vs Browser API
@@ -974,7 +974,7 @@ export class FileManager {
      * @throws any errors that your callback function throws
      * @public
      */
-    processFrontMatter(file: TFile, fn: (frontMatter: any) => void): Promise<void>;
+    processFrontMatter(file: TFile, fn: (frontmatter: any) => void): Promise<void>;
 
 }
 
@@ -1251,6 +1251,7 @@ export interface HeadingCache extends CacheItem {
      * @public
      */
     heading: string;
+
     /**
      * @public
      */
@@ -2397,14 +2398,32 @@ export const Platform: {
      * @public
      */
     isAndroidApp: boolean;
-
+    /**
+     * We're in a mobile app that has very limited screen space.
+     * @public
+     */
+    isPhone: boolean;
+    /**
+     * We're in a mobile app that has sufficiently large screen space.
+     * @public
+     */
+    isTablet: boolean;
     /**
      * We're on a macOS device, or a device that pretends to be one (like iPhones and iPads).
      * Typically used to detect whether to use command-based hotkeys vs ctrl-based hotkeys.
      * @public
      */
     isMacOS: boolean;
-
+    /**
+     * We're on a Windows device.
+     * @public
+     */
+    isWin: boolean;
+    /**
+     * We're on a Linux device.
+     * @public
+     */
+    isLinux: boolean;
     /**
      * We're running in Safari.
      * Typically used to provide workarounds for Safari bugs.
@@ -2418,6 +2437,7 @@ export const Platform: {
  * @public
  */
 export abstract class Plugin_2 extends Component {
+
     /**
      * @public
      */
@@ -2479,6 +2499,8 @@ export abstract class Plugin_2 extends Component {
      * Runs callback on all currently loaded instances of CodeMirror,
      * then registers the callback for all future CodeMirror instances.
      * @public
+     * @deprecated - This is only used with the legacy editor, which is no longer maintained,
+     * and will be removed in a future update.
      */
     registerCodeMirror(callback: (cm: CodeMirror.Editor) => any): void;
     /**
@@ -3931,10 +3953,6 @@ export class Workspace extends Events {
      * @public
      */
     on(name: 'resize', callback: () => any, ctx?: any): EventRef;
-    /**
-     * @public
-     */
-    on(name: 'click', callback: (evt: MouseEvent) => any, ctx?: any): EventRef;
     /**
      * @public
      */
