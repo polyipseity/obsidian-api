@@ -1,5 +1,5 @@
 {
-    "name": "obsidian",
+    "name": "@polyipseity/obsidian",
     "version": "1.2.8",
     "description": "Type definitions for the latest Obsidian API (https://obsidian.md)",
     "keywords": ["obsdmd"],
