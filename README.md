@@ -1,5 +1,7 @@
 ## Obsidian API
 
+_forked from [obsidianmd/obsidian-api](https://github.com/obsidianmd/obsidian-api)_
+
 Type definitions for the latest [Obsidian](https://obsidian.md) API.
 
 ### Documentation
