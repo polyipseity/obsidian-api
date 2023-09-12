@@ -19,6 +19,9 @@
         "@codemirror/state": "^6.0.0",
         "@codemirror/view": "^6.0.0"
     },
+    "pnpm": {
+        "publishBranch": "forks/polyipseity"
+    },
     "files": [
         "**/*.d.ts"
     ]
