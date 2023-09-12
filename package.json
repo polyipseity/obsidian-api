@@ -1,6 +1,6 @@
 {
     "name": "@polyipseity/obsidian",
-    "version": "1.4.0",
+    "version": "1.4.4",
     "description": "Type definitions for the latest Obsidian API (https://obsidian.md)",
     "keywords": ["obsdmd"],
     "homepage": "https://github.com/polyipseity/obsidian-api#readme",
