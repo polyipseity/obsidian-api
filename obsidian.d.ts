@@ -26,6 +26,33 @@ declare global {
 }
 
 /**
+ * Attach to an <input> element or a <div contentEditable> to add type-ahead
+ * support.
+ *
+ * @public
+ */
+export abstract class AbstractInputSuggest<T> extends PopoverSuggest<T> {
+
+    /**
+     * Limit to the number of elements rendered at once. Set to 0 to disabled.
+     * @public
+     */
+    limit: number;
+    /** @public */
+    constructor(app: App, textInputEl: HTMLInputElement | HTMLDivElement);
+
+    /** @public */
+    setValue(data: string): void;
+    /** @public */
+    getValue(): string;
+
+    /**
+     * @public
+     */
+    onSelect(callback: (value: T, evt: MouseEvent | KeyboardEvent) => any): this;
+}
+
+/**
  * @public
  */
 export class AbstractTextComponent<T extends HTMLInputElement | HTMLTextAreaElement> extends ValueComponent<string> {
@@ -2786,8 +2813,15 @@ export enum PopoverState {
 
 }
 
-/** @public */
+/**
+ * Base class for adding a type-ahead popover.
+ * @public
+ */
 export abstract class PopoverSuggest<T> implements ISuggestOwner<T>, CloseableComponent {
+    /** @public */
+    app: App;
+    /** @public */
+    scope: Scope;
 
     /** @public */
     constructor(app: App, scope?: Scope);
@@ -3988,6 +4022,11 @@ export interface ViewState {
  * @public
  */
 export interface ViewStateResult {
+    /**
+     * Set this to true to indicate that there is a state change which should be recorded in the navigation history.
+     * @public
+     */
+    history: boolean;
 
 }
 
@@ -4268,6 +4307,11 @@ export class Workspace extends Events {
      * @public
      */
     on(name: 'file-menu', callback: (menu: Menu, file: TAbstractFile, source: string, leaf?: WorkspaceLeaf) => any, ctx?: any): EventRef;
+    /**
+     * Triggered when the user opens the context menu with multiple files selected in the File Explorer.
+     * @public
+     */
+    on(name: 'files-menu', callback: (menu: Menu, files: TAbstractFile[], source: string, leaf?: WorkspaceLeaf) => any, ctx?: any): EventRef;
 
     /**
      * Triggered when the user opens the context menu on an editor.
